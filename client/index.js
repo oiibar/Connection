@@ -2,7 +2,7 @@ const messageform = document.querySelector(".chatbox form");
 const messageList = document.querySelector("#messagelist");
 const userList = document.querySelector("ul#users");
 const chatboxinput = document.querySelector(".chatbox input");
-const socket = io("http://localhost:5000");
+const socket = io("https://connection-serv.onrender.com");
 
 let users = [];
 let messages = [];
