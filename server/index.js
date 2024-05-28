@@ -7,7 +7,7 @@ const server = require("http").createServer(app);
 
 const io = Socket(server, {
   cors: {
-    origin: ["https://connection-cli.onrender.com"],
+    origin: ["*:*"],
     credentials: true,
     optionsSuccessStatus: 200,
     methods: ["GET", "POST"],
