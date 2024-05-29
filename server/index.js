@@ -1,15 +1,15 @@
 const express = require("express");
-const Socket = require("socket.io");
+const http = require("http");
+const { Server } = require("socket.io");
+
 const PORT = 10000;
-
 const app = express();
-const server = require("http").createServer(app);
+const server = http.createServer(app);
 
-const io = Socket(server, {
+const io = new Server(server, {
   cors: {
-    origin: ["*:*"],
+    origin: "*", // Allow all origins
     credentials: true,
-    optionsSuccessStatus: 200,
     methods: ["GET", "POST"],
   },
 });
@@ -41,12 +41,12 @@ io.on("connection", (socket) => {
     console.log(`user ${socket.user} is disconnected`);
     if (socket.user) {
       users.splice(users.indexOf(socket.user), 1);
-      io.sockets.emit("user", users);
+      io.sockets.emit("users", users); // Corrected event name
       console.log("remaining users:", users);
     }
   });
 });
 
 server.listen(PORT, () => {
-  console.log("listening on PORT: ", PORT);
+  console.log("listening on PORT:", PORT);
 });
